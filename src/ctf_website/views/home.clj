@@ -1,8 +1,8 @@
-(ns ctf-website.views.welcome
+(ns ctf-website.views.home
   (:require [ctf-website.views.common :as common])
   (:use [noir.core :only [defpage]]
         [hiccup.core :only [html]]))
 
-(defpage "/welcome" []
+(defpage "/" []
          (common/layout
            [:p "Welcome to ctf-website"]))
