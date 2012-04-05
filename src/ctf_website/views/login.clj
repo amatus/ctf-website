@@ -12,3 +12,19 @@
                [:p "You're in"])
              (common/layout
                [:p "Go away"]))))
+
+(defpage "/login" []
+         (common/layout
+           [:h1 "Austin 2600 CTF server"]
+           [:a {:href "new"} "Create account"]
+           [:form {:method "POST"
+                   :action "login"}
+            [:p "Username:"
+             [:input {:type "text"
+                      :name "username"}]]
+            [:p "Password:"
+             [:input {:type "password"
+                      :name "password"}]]
+            [:p
+             [:input {:type "submit"
+                      :value "Login"}]]]))
