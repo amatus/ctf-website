@@ -5,8 +5,7 @@
 (defpartial layout [& content]
             (html5
               [:head
-               [:title "ctf-website"]
-               (include-css "/css/reset.css")]
+               [:title "ctf-website"]]
               [:body
                [:div#wrapper
                 content]]))

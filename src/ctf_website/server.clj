@@ -1,5 +1,6 @@
 (ns ctf-website.server
-  (:require [noir.server :as server]))
+  (:require [noir.server :as server]
+            [ctf-website.models :as models]))
 
 (server/load-views "src/ctf_website/views/")
 
@@ -16,6 +17,7 @@
 (defn -main [& m]
   (let [mode (keyword (or (first m) :dev))
         port (Integer. (get (System/getenv) "PORT" "80"))]
+    (models/initialize)
     (server/start port {:mode mode
                         :jetty-options {:ssl? true
                                         :ssl-port 443

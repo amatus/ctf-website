@@ -1,22 +1,17 @@
 (ns ctf-website.views.flag
   (:require [ctf-website.views.common :as common]
+            [ctf-website.models.flags :as flags]
             [noir.session :as session])
   (:use [noir.core :only [defpage]]
-        [hiccup.core :only [html]]))
-
-(def no-session
-  (common/layout
-    [:p "You seem to have lost your session. Try to "
-     [:a {:href "login"} "login"]
-     " again."]))
-
-(def good
-  (common/layout
-    [:p "Your flag was accepted."]))
+        [hiccup.page-helpers :only [link-to]]))
 
 (defpage
   [:post "/flag"] {:keys [flag]}
-  (let [username (session/get :user)]
-    (if (nil? username)
-      no-session
-      good)))
+  (common/layout
+    (let [username (session/get :user)]
+      (if (nil? username)
+        [:p "You seem to have lost your session. Try to "
+         (link-to "login" "login") " again."]
+        (if (flags/submit! username flag)
+          [:p "Your flag was accepted."]
+          [:p "Your flag was rejected."])))))
