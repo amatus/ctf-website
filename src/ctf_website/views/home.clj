@@ -2,7 +2,7 @@
   (:require [ctf-website.views.common :as common]
             [noir.session :as session])
   (:use [noir.core :only [defpage]]
-        [hiccup.core :only [html]]))
+        [hiccup.core :only [h]]))
 
 (defpage
   "/" []
@@ -13,7 +13,7 @@
         [:a {:href "login"} "Compete"]
         [:form {:method "POST"
                 :action "flag"}
-         [:p (str "Submit flag as " username ":")
+         [:p (str "Submit flag as " (h username) ":")
           [:input {:type "text"
                    :name "flag"}]
           [:input {:type "submit"
