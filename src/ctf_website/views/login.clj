@@ -1,5 +1,6 @@
 (ns ctf-website.views.login
-  (:require [ctf-website.views.common :as common])
+  (:require [ctf-website.views.common :as common]
+            [noir.session :as session])
   (:import net.sf.jpam.Pam)
   (:use [noir.core :only [defpage]]
         [hiccup.core :only [html]]))
@@ -8,8 +9,9 @@
          (let [pam (Pam.)
                authenticated (.authenticateSuccessful pam username password)]
            (if authenticated
-             (common/layout
-               [:p "You're in"])
+             (do
+               (session/put! :user username)
+               (ring.util.response/redirect "/"))
              (common/layout
                [:p "Go away"]))))
 
