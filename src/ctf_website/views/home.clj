@@ -60,8 +60,10 @@
             [:div ;; I don't know why this needs to be a div
              [:dt "test flag"]
              [:dd "- b46911b2d927d89bc2b1143a7f5d9c20"]])
-          [:dt "flags found in /home/ctf/flags"]
+          [:dt "ssh in and try to read these flags in /flags"]
           [:dd "- exec.flag"]
+          [:dd "- format.flag"]
           [:dd "- lottery.flag"]
           [:dd "- rsa.flag"]
+          [:dd "- simple.flag"]
           ]]))))
