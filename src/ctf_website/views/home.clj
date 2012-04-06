@@ -44,12 +44,19 @@
       (scoreboard-table (scoreboard/get-scores))
       (if (nil? username)
         [:a {:href "login"} "Compete"]
-        [:form {:method "POST"
-                :action "flag"}
-         [:p (str "Submit flag as " (h username) ":")
-          [:input {:type "text"
-                   :name "flag"
-                   :value (when (not (scoreboard/has username "test"))
-                            "b46911b2d927d89bc2b1143a7f5d9c20")}]
-          [:input {:type "submit"
-                   :value "Submit"}]]]))))
+        [:div ;; as apposed to '(do' i guess
+         [:form {:method "POST"
+                 :action "flag"}
+          [:p (str "Submit flag as " (h username) ":")
+           [:input {:type "text"
+                    :name "flag"
+                    :size "40"}]
+           [:input {:type "submit"
+                    :value "Submit"}]]]
+         [:h2 "Welcome Grid Warrior"]
+         [:p "Test your skills with the challenges below:"]
+         [:ul
+          (when (not (scoreboard/has username "test"))
+            [:li "test flag - b46911b2d927d89bc2b1143a7f5d9c20"])
+          [:li "exec flag - try to read /home/ctf/flags/exec.flag"]]
+         ]))))
