@@ -55,8 +55,13 @@
                     :value "Submit"}]]]
          [:h2 "Welcome Grid Warrior"]
          [:p "Test your skills with the challenges below:"]
-         [:ul
+         [:dl
           (when (not (scoreboard/has username "test"))
-            [:li "test flag - b46911b2d927d89bc2b1143a7f5d9c20"])
-          [:li "exec flag - try to read /home/ctf/flags/exec.flag"]]
-         ]))))
+            [:div ;; I don't know why this needs to be a div
+             [:dt "test flag"]
+             [:dd "- b46911b2d927d89bc2b1143a7f5d9c20"]])
+          [:dt "flags found in /home/ctf/flags"]
+          [:dd "- exec.flag"]
+          [:dd "- lottery.flag"]
+          [:dd "- rsa.flag"]
+          ]]))))
