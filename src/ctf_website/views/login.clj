@@ -13,7 +13,7 @@
                (session/put! :user username)
                (ring.util.response/redirect "/"))
              (common/layout
-               [:p "Go away"]))))
+               [:p "Try again"]))))
 
 (defpage "/login" []
          (common/layout
