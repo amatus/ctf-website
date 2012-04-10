@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+from Crypto.PublicKey import RSA
+import pickle
+
+keys = {}
+keys['Alice'] = RSA.generate(1024)
+keys['Bob'] = RSA.generate(1024).publickey()
+
+with open('rsa.keys', 'w') as f:
+	pickle.dump(keys, f)
