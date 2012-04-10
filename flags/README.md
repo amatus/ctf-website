@@ -27,11 +27,16 @@ Exploit
 -------
 
 Change the current directory to one in which we have write permissions.
+
     cd ~
+
 Create a symlink named "simple.not.the.flag" that points to the flag file we
 want.
+
     ln -s /flags/simple.flag simple.not.the.flag
+    
 Run the program from this directory.
+
     /flags/simple
 
 Exec
@@ -48,6 +53,7 @@ Synopsis
 --------
 
 This program:
+
 1. Opens the flag file "/flags/exec.flag".
 2. Reads it into memory.
 3. Forks a child process.
@@ -67,8 +73,10 @@ Exploit
 
 Write a program which performs the following operations on file descriptor
 number 3:
+
 1. Seeks to the beginning of the file.
 2. Reads the contents of the file and prints it out.
+
 Run the exec program given the name of the our exploit program to execute.
 
 RSA
@@ -97,16 +105,19 @@ starts a TCPServer to handle requests. When a request is received it is
 unpickled into a python object and the "request" property is examined.
 If the request property is the string "start" a new python object with the
 following properties is pickled and sent to the remote peer:
-name = "Alice"
-request = "get_flag"
-keyid = MD5(DER encoding of Alice's public key)
-signature = Sig(request + ":" + AsciiHex(keyid), Alice's private key)
+
+    name = "Alice"
+    request = "get_flag"
+    keyid = MD5(DER encoding of Alice's public key)
+    signature = Sig(request + ":" + AsciiHex(keyid), Alice's private key)
+
 If the request property is the string "get_flag" the message must pass these
 tests before the flag is sent to the remote peer:
-The the name property must exist in the keystore.
-The keyid property must match the MD5 hash of a key in the keystore.
-The name must not be the string "Alice".
-The signature is validated against the key in the keystore which matches the
+
+1. The the name property must exist in the keystore.
+2. The keyid property must match the MD5 hash of a key in the keystore.
+3. The name must not be the string "Alice".
+4. The signature is validated against the key in the keystore which matches the
 keyid property.
 
 Vulnerability
@@ -121,6 +132,7 @@ Exploit
 
 Using the python REPL, connect to the rsa.py server, send the "start" request,
 and unpickle the response.
+
     >>> import socket, pickle
     >>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     >>> sock.connect(('localhost', 6666))
@@ -132,13 +144,17 @@ and unpickle the response.
     >>> sock.sendall(pickle.dumps(msg))
     >>> buf = sock.recv(1024)
     >>> msg2 = pickle.loads(buf)
+    
 Reconnect to the server (this has something to do with the way I coded rsa.py),
 modify the name property of the reponse to "Bob" and send it back.
+
     >>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     >>> sock.connect(('localhost', 6666))
     >>> msg2.name='Bob'
     >>> sock.sendall(pickle.dumps(msg2))
+    
 Consume the response and unpickle it.
+
     >>> buf = sock.recv(1024)
     >>> pickle.loads(buf)
 
