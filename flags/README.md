@@ -109,7 +109,7 @@ following properties is pickled and sent to the remote peer:
     name = "Alice"
     request = "get_flag"
     keyid = MD5(DER encoding of Alice's public key)
-    signature = Sig(request + ":" + AsciiHex(keyid), Alice's private key)
+    signature = Sig(keyid + ":" + request, Alice's private key)
 
 If the request property is the string "get_flag" the message must pass these
 tests before the flag is sent to the remote peer:
