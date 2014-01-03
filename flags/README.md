@@ -98,8 +98,8 @@ Synopsis
 The make-keys.rsa program is a python script which generates the rsa.keys
 keystore containing a private and public key for "Alice" and a public key for
 "Bob".
-The rsa-runner program is a setgid wrapper for rsa.py, since interpred scripts
-cannot be run setgid.
+The rsa-runner program is a setgid wrapper for rsa.py, since interpreted
+scripts cannot be run setgid.
 The rsa.py program reads the flag file and the keystore into memory and then
 starts a TCPServer to handle requests. When a request is received it is
 unpickled into a python object and the "request" property is examined.
