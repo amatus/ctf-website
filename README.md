@@ -4,10 +4,8 @@ The website for a Capture The Flag competition.
 
 ## Usage
 
-```bash
-lein deps
-lein run
-```
+    lein deps
+    lein run
 
 ## License
 
